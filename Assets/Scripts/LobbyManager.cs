@@ -15,6 +15,7 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private GameObject panelHost;
     [SerializeField] private GameObject buttonJoin;
     [SerializeField] private GameObject joinInputGroup;
+    [SerializeField] private GameObject logo;
 
     [SerializeField] private TextMeshProUGUI textJoinCode;
     [SerializeField] private TMP_InputField inputJoinCode;
@@ -62,6 +63,7 @@ public class LobbyManager : MonoBehaviour
     {
         panelMain.SetActive(false);
         panelHost.SetActive(true);
+        logo.SetActive(false);
         textJoinCode.text = "Creating room...";
         StartCoroutine(HostGameCR());
     }
