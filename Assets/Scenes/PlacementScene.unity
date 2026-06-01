@@ -504,12 +504,8 @@ RectTransform:
   - {fileID: 1380551652}
   - {fileID: 1440756436}
   - {fileID: 1277015505}
-<<<<<<< HEAD
   - {fileID: 786735165}
   m_Father: {fileID: 2102604335}
-=======
-  m_Father: {fileID: 1179989491}
->>>>>>> b2b3e2aa4f05485bbae27674e1a0660fb6cbd5d9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2404,7 +2400,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102346901}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
 --- !u!114 &2102346905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2431,9 +2426,6 @@ CanvasGroup:
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &2102604334
-=======
---- !u!1 &2130013611
->>>>>>> b2b3e2aa4f05485bbae27674e1a0660fb6cbd5d9
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2441,31 +2433,20 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< HEAD
   - component: {fileID: 2102604335}
   m_Layer: 0
   m_Name: UI
-=======
-  - component: {fileID: 2130013612}
-  m_Layer: 0
-  m_Name: --------------
->>>>>>> b2b3e2aa4f05485bbae27674e1a0660fb6cbd5d9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
-<<<<<<< HEAD
 --- !u!4 &2102604335
-=======
---- !u!4 &2130013612
->>>>>>> b2b3e2aa4f05485bbae27674e1a0660fb6cbd5d9
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
   m_GameObject: {fileID: 2102604334}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2474,15 +2455,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 566468943}
-=======
-  m_GameObject: {fileID: 2130013611}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 927.9233, y: 476.52454, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
->>>>>>> b2b3e2aa4f05485bbae27674e1a0660fb6cbd5d9
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
@@ -2491,14 +2463,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 180291267}
   - {fileID: 1784278673}
-<<<<<<< HEAD
   - {fileID: 223651489}
   - {fileID: 1975722911}
   - {fileID: 2102604335}
   - {fileID: 2085237536}
   - {fileID: 1326848252}
-=======
-  - {fileID: 2130013612}
-  - {fileID: 1179989491}
->>>>>>> b2b3e2aa4f05485bbae27674e1a0660fb6cbd5d9
   - {fileID: 1436882646}
