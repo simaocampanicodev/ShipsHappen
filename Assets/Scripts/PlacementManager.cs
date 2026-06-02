@@ -3,9 +3,12 @@ using TMPro;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlacementManager : NetworkBehaviour
 {
+    public static PlacementManager Instance;
+
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private GameObject buttonConfirm;
 
@@ -14,6 +17,15 @@ public class PlacementManager : NetworkBehaviour
     private float timeLeft = 120f;
     private bool timerRunning = false;
     private bool localConfirmed = false;
+
+    // ultimo barco inserido na grid, usado pelo botao rotate
+    public ShipDragger LastPlacedShip { get; set; }
+    public bool IsConfirmed => localConfirmed;
+
+    void Awake()
+    {
+        Instance = this;
+    }
 
     public override void OnNetworkSpawn()
     {
@@ -70,8 +82,19 @@ public class PlacementManager : NetworkBehaviour
         }
 
         localConfirmed = true;
-        buttonConfirm.GetComponent<UnityEngine.UI.Button>().interactable = false;
+
+        // esconde o botao de confirm
+        buttonConfirm.SetActive(false);
+
         ConfirmServerRpc();
+    }
+
+    // botao rotate chama este metodo, que delega no ultimo barco colocado
+    public void OnClickRotate()
+    {
+        if (localConfirmed) return;
+        if (LastPlacedShip == null) return;
+        LastPlacedShip.Rotate();
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]

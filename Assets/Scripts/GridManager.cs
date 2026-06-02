@@ -51,11 +51,20 @@ public class GridManager : MonoBehaviour
 
     public float GetCellSize()
     {
-        // força o layout a calcular antes de ler o tamanho
-        UnityEngine.UI.LayoutRebuilder.ForceRebuildLayoutImmediate(
+        LayoutRebuilder.ForceRebuildLayoutImmediate(
             gridParent.GetComponent<RectTransform>()
         );
-        return cells[0, 0].GetComponent<RectTransform>().rect.width;
+        var grid = gridParent.GetComponent<GridLayoutGroup>();
+        // tamanho real de uma celula + spacing
+        return grid.cellSize.x;
+    }
+
+    // calcular a largura total barco
+    public float GetShipWidth(int size)
+    {
+        var grid = gridParent.GetComponent<GridLayoutGroup>();
+        // largura = (tamanho * cellSize) + ((tamanho - 1) * spacing)
+        return size * grid.cellSize.x + (size - 1) * grid.spacing.x;
     }
 
     // converte world para grid
