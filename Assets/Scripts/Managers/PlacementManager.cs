@@ -111,8 +111,24 @@ public class PlacementManager : NetworkBehaviour
             if (IsServer)
             {
                 timerRunning = false;
-                NetworkManager.Singleton.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+                // envia os dados para o GameData antes de mudar de cena
+                SendShipDataClientRpc();
             }
         }
+    }
+
+    [ClientRpc]
+    private void SendShipDataClientRpc()
+    {
+        // copia os barcos locais para o GameData
+        GameData.Instance.MyShips = GridManager.Instance.occupied;
+        StartCoroutine(LoadGameSceneCR());
+    }
+
+    private IEnumerator LoadGameSceneCR()
+    {
+        yield return new WaitForSeconds(0.5f);
+        if (IsServer)
+            NetworkManager.Singleton.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
     }
 }
