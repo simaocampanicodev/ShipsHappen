@@ -23,6 +23,8 @@ public class ShipDragger : MonoBehaviour,
     // guarda a celula de ancoragem para o rotate
     private int anchorX = 0;
     private int anchorY = 0;
+    private int horizontalAnchorX = 0;
+    private int horizontalAnchorY = 0;
 
     void Awake()
     {
@@ -67,23 +69,38 @@ public class ShipDragger : MonoBehaviour,
         // liberta as celulas atuais
         GridManager.Instance.SetOccupied(occupiedCells, false);
 
-        // tenta rodar a partir da ancora atual
-        var newCells = GetCellsOriented(anchorX, anchorY, tryHorizontal);
+        List<Vector2Int> newCells = null;
+        int newAnchorX, newAnchorY;
 
-        // se nao couber, tenta ajustar a ancora para que o barco caiba
-        if (!GridManager.Instance.CanPlace(newCells))
+        if (tryHorizontal)
         {
-            newCells = TryFindValidRotation(anchorX, anchorY, tryHorizontal);
+            // a voltar a horizontal, usa a ancora original guardada
+            newAnchorX = horizontalAnchorX;
+            newAnchorY = horizontalAnchorY;
+            newCells = GetCellsOriented(newAnchorX, newAnchorY, true);
+
+            if (!GridManager.Instance.CanPlace(newCells))
+                newCells = TryFindValidRotation(anchorX, anchorY, true, out newAnchorX, out newAnchorY);
+        }
+        else
+        {
+            newCells = TryFindValidRotation(anchorX, anchorY, false, out newAnchorX, out newAnchorY);
+            newAnchorX = newCells != null ? newCells[0].x : anchorX;
+            newAnchorY = newCells != null ? newCells[0].y : anchorY;
         }
 
         if (newCells != null && GridManager.Instance.CanPlace(newCells))
         {
+            if (!tryHorizontal)
+            {
+                horizontalAnchorX = anchorX;
+                horizontalAnchorY = anchorY;
+            }
+
             isHorizontal = tryHorizontal;
             occupiedCells = newCells;
-
-            // atualiza a ancora para a primeira celula da nova orientacao
-            anchorX = newCells[0].x;
-            anchorY = newCells[0].y;
+            anchorX = newAnchorX;
+            anchorY = newAnchorY;
 
             GridManager.Instance.SetOccupied(occupiedCells, true);
 
@@ -101,37 +118,45 @@ public class ShipDragger : MonoBehaviour,
         }
     }
 
-    private List<Vector2Int> TryFindValidRotation(int gx, int gy, bool horizontal)
+    private List<Vector2Int> TryFindValidRotation(int gx, int gy, bool horizontal, out int foundX, out int foundY)
     {
-        // tenta deslocar a ancora ate encontrar uma posicao valida dentro da grid
-        int range = shipSize;
-        for (int delta = -range; delta <= range; delta++)
+        foundX = gx;
+        foundY = gy;
+
+        var cells = GetCellsOriented(gx, gy, horizontal);
+        if (IsInBounds(cells) && GridManager.Instance.CanPlace(cells))
+            return cells;
+
+        for (int delta = 1; delta <= shipSize; delta++)
         {
-            int nx = horizontal ? gx + delta : gx;
-            int ny = horizontal ? gy : gy + delta;
-
-            // verifica limites da grid
-            if (nx < 0 || ny < 0 || nx >= GridManager.SIZE || ny >= GridManager.SIZE)
-                continue;
-
-            var cells = GetCellsOriented(nx, ny, horizontal);
-
-            // verifica se todas as celulas estao dentro da grid
-            bool allInBounds = true;
-            foreach (var c in cells)
+            int nx1 = horizontal ? gx - delta : gx;
+            int ny1 = horizontal ? gy : gy - delta;
+            cells = GetCellsOriented(nx1, ny1, horizontal);
+            if (IsInBounds(cells) && GridManager.Instance.CanPlace(cells))
             {
-                if (c.x < 0 || c.x >= GridManager.SIZE || c.y < 0 || c.y >= GridManager.SIZE)
-                {
-                    allInBounds = false;
-                    break;
-                }
+                foundX = nx1; foundY = ny1;
+                return cells;
             }
 
-            if (allInBounds && GridManager.Instance.CanPlace(cells))
+            int nx2 = horizontal ? gx + delta : gx;
+            int ny2 = horizontal ? gy : gy + delta;
+            cells = GetCellsOriented(nx2, ny2, horizontal);
+            if (IsInBounds(cells) && GridManager.Instance.CanPlace(cells))
+            {
+                foundX = nx2; foundY = ny2;
                 return cells;
+            }
         }
 
-        return null; // sem posicao valida encontrada
+        return null;
+    }
+
+    private bool IsInBounds(List<Vector2Int> cells)
+    {
+        foreach (var c in cells)
+            if (c.x < 0 || c.x >= GridManager.SIZE || c.y < 0 || c.y >= GridManager.SIZE)
+                return false;
+        return true;
     }
 
     public void OnBeginDrag(PointerEventData e)
@@ -180,7 +205,15 @@ public class ShipDragger : MonoBehaviour,
             return;
         }
 
-        var cells = GetCells(gx, gy);
+        // ajusta a ancora para o canto esquerdo do barco
+        int anchorGx = isHorizontal ? gx - (shipSize / 2) : gx;
+        int anchorGy = isHorizontal ? gy : gy - (shipSize / 2);
+
+        // garante que nao sai fora da grid
+        anchorGx = Mathf.Clamp(anchorGx, 0, GridManager.SIZE - (isHorizontal ? shipSize : 1));
+        anchorGy = Mathf.Clamp(anchorGy, 0, GridManager.SIZE - (isHorizontal ? 1 : shipSize));
+
+        var cells = GetCellsOriented(anchorGx, anchorGy, isHorizontal);
 
         if (!GridManager.Instance.CanPlace(cells))
         {
@@ -194,14 +227,16 @@ public class ShipDragger : MonoBehaviour,
         isPlaced = true;
 
         // guarda ancora para o rotate
-        anchorX = gx;
-        anchorY = gy;
+        anchorX = anchorGx;
+        anchorY = anchorGy;
+        horizontalAnchorX = anchorGx;
+        horizontalAnchorY = anchorGy;
 
         // regista este barco como o ultimo colocado
         PlacementManager.Instance.LastPlacedShip = this;
 
         // posicionar celula no centro
-        SnapToCell(gx, gy);
+        SnapToCell(anchorX, anchorY);
     }
 
     public void OnPointerClick(PointerEventData e)
