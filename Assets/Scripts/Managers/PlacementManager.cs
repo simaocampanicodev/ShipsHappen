@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -73,8 +74,6 @@ public class PlacementManager : NetworkBehaviour
     public void OnClickConfirm()
     {
         if (localConfirmed) return;
-
-        // check dos barcos
         if (!GridManager.Instance.AllShipsPlaced())
         {
             Debug.LogWarning("Still ships to place");
@@ -82,10 +81,32 @@ public class PlacementManager : NetworkBehaviour
         }
 
         localConfirmed = true;
-
-        // esconde o botao de confirm
         buttonConfirm.SetActive(false);
 
+        // recolhe as celulas de cada barco individualmente
+        List<ShipDragger> allShips = new List<ShipDragger>(
+            FindObjectsByType<ShipDragger>()
+        );
+
+        // passa para o ShipStatusPanel as posicoes individuais
+        // (apenas o jogador local tem o painel)
+        List<List<Vector2Int>> shipCellGroups = new List<List<Vector2Int>>();
+        foreach (var ship in allShips)
+        {
+            var cells = ship.GetOccupiedCells();
+            if (cells.Count > 0)
+                shipCellGroups.Add(cells);
+        }
+
+        ShipStatusPanel.Instance.RegisterShipsExact(shipCellGroups);
+
+        // converte o array 2D para flat para enviar pela rede
+        bool[] shipsFlat = new bool[100];
+        for (int x = 0; x < 10; x++)
+            for (int y = 0; y < 10; y++)
+                shipsFlat[x + y * 10] = GridManager.Instance.occupied[x, y];
+
+        SendShipsToServerServerRpc(shipsFlat, NetworkManager.Singleton.LocalClientId);
         ConfirmServerRpc();
     }
 
@@ -130,5 +151,15 @@ public class PlacementManager : NetworkBehaviour
         yield return new WaitForSeconds(0.5f);
         if (IsServer)
             NetworkManager.Singleton.SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    public void SendShipsToServerServerRpc(bool[] shipsFlat, ulong clientId)
+    {
+        bool[,] ships = new bool[10, 10];
+        for (int i = 0; i < 100; i++)
+            ships[i % 10, i / 10] = shipsFlat[i];
+
+        GameData.Instance.SetShips(clientId, ships);
     }
 }

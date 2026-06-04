@@ -119,6 +119,91 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &95309047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 95309049}
+  - component: {fileID: 95309048}
+  m_Layer: 0
+  m_Name: ShipsStatus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &95309048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95309047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a239334103ad9344f85e6b6b1083bff3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShipStatusPanel
+  ships:
+  - shipObject: {fileID: 1796293340}
+    shipSize: 1
+    cells: []
+    hitCount: 0
+    sunk: 0
+  - shipObject: {fileID: 1062243488}
+    shipSize: 1
+    cells: []
+    hitCount: 0
+    sunk: 0
+  - shipObject: {fileID: 2102346901}
+    shipSize: 1
+    cells: []
+    hitCount: 0
+    sunk: 0
+  - shipObject: {fileID: 1561730141}
+    shipSize: 2
+    cells: []
+    hitCount: 0
+    sunk: 0
+  - shipObject: {fileID: 1218680520}
+    shipSize: 2
+    cells: []
+    hitCount: 0
+    sunk: 0
+  - shipObject: {fileID: 469850417}
+    shipSize: 3
+    cells: []
+    hitCount: 0
+    sunk: 0
+  - shipObject: {fileID: 1571793600}
+    shipSize: 4
+    cells: []
+    hitCount: 0
+    sunk: 0
+  - shipObject: {fileID: 2084385698}
+    shipSize: 5
+    cells: []
+    hitCount: 0
+    sunk: 0
+--- !u!4 &95309049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95309047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -148.3599, y: -78.88939, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &180291264
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,7 +748,7 @@ GameObject:
   - component: {fileID: 1062243492}
   - component: {fileID: 1062243493}
   m_Layer: 5
-  m_Name: Ship_1x1
+  m_Name: Ship_1x1b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -888,37 +973,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1175322402}
   m_CullTransparentMesh: 1
---- !u!1 &1179989490
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1179989491}
-  m_Layer: 0
-  m_Name: UI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1179989491
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179989490}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 927.9233, y: 476.52454, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1218680520
 GameObject:
   m_ObjectHideFlags: 0
@@ -933,7 +987,7 @@ GameObject:
   - component: {fileID: 1218680524}
   - component: {fileID: 1218680525}
   m_Layer: 5
-  m_Name: Ship_2x1
+  m_Name: Ship_2x1b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1614,7 +1668,7 @@ GameObject:
   - component: {fileID: 1561730145}
   - component: {fileID: 1561730146}
   m_Layer: 5
-  m_Name: Ship_2x1
+  m_Name: Ship_2x1a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2034,7 +2088,7 @@ GameObject:
   - component: {fileID: 1796293344}
   - component: {fileID: 1796293345}
   m_Layer: 5
-  m_Name: 'Ship_1x1 '
+  m_Name: Ship_1x1a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2360,7 +2414,7 @@ GameObject:
   - component: {fileID: 2102346905}
   - component: {fileID: 2102346906}
   m_Layer: 5
-  m_Name: Ship_1x1
+  m_Name: Ship_1x1c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2492,4 +2546,4 @@ SceneRoots:
   - {fileID: 2085237536}
   - {fileID: 1326848252}
   - {fileID: 1436882646}
-  - {fileID: 1179989491}
+  - {fileID: 95309049}

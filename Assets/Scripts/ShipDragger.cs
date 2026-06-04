@@ -297,4 +297,9 @@ public class ShipDragger : MonoBehaviour,
         isHorizontal = true;
         AdjustSize();
     }
+
+    public List<Vector2Int> GetOccupiedCells()
+    {
+        return new List<Vector2Int>(occupiedCells);
+    }
 }

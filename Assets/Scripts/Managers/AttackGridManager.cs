@@ -22,9 +22,21 @@ public class AttackGridManager : MonoBehaviour
             {
                 var cell = Instantiate(attackCellPrefab, transform);
                 cell.name = $"AtkCell_{x}_{y}";
+
+                // liga o AttackCell
                 var attackCell = cell.GetComponent<AttackCell>();
                 attackCell.x = x;
                 attackCell.y = y;
+
+                // liga o botao por codigo
+                int capturedX = x;
+                int capturedY = y;
+                var button = cell.GetComponent<Button>();
+                button.onClick.AddListener(() =>
+                {
+                    GameManager.Instance.OnCellClicked(capturedX, capturedY);
+                });
+
                 cells[x, y] = cell;
             }
         }
