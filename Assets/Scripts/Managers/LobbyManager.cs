@@ -20,16 +20,12 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textJoinCode;
     [SerializeField] private TMP_InputField inputJoinCode;
 
-
     [SerializeField] private UnityTransport transport;
+
+    private bool isCancelled = false;
 
     void Start()
     {
-        if (NetworkManager.Singleton != null && !NetworkManager.Singleton.IsServer && !NetworkManager.Singleton.IsClient)
-        {
-            Destroy(NetworkManager.Singleton.gameObject);
-        }
-
         panelMain.SetActive(true);
         panelHost.SetActive(false);
 
@@ -66,6 +62,7 @@ public class LobbyManager : MonoBehaviour
     // host panel
     public void OnClickHost()
     {
+        isCancelled = false;
         panelMain.SetActive(false);
         panelHost.SetActive(true);
         logo.SetActive(false);
@@ -79,6 +76,8 @@ public class LobbyManager : MonoBehaviour
         var allocationTask = RelayService.Instance.CreateAllocationAsync(1);
         yield return new WaitUntil(() => allocationTask.IsCompleted);
 
+        if (isCancelled) yield break;
+
         if (allocationTask.Exception != null)
         {
             textJoinCode.text = "Error creating room.";
@@ -91,6 +90,8 @@ public class LobbyManager : MonoBehaviour
         // join code
         var joinCodeTask = RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
         yield return new WaitUntil(() => joinCodeTask.IsCompleted);
+
+        if (isCancelled) yield break;
 
         if (joinCodeTask.Exception != null)
         {
@@ -113,6 +114,8 @@ public class LobbyManager : MonoBehaviour
             );
             break;
         }
+
+        if (isCancelled) yield break;
 
         textJoinCode.text = $"Join Code: {joinCode}";
 
@@ -152,7 +155,9 @@ public class LobbyManager : MonoBehaviour
 
     public void OnClickBack()
     {
-        if (NetworkManager.Singleton.IsHost)
+        isCancelled = true;
+
+        if (NetworkManager.Singleton != null && NetworkManager.Singleton.IsHost)
             NetworkManager.Singleton.Shutdown();
 
         panelHost.SetActive(false);
