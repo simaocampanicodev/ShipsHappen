@@ -28,35 +28,6 @@ public class LobbyManager : MonoBehaviour
     {
         panelMain.SetActive(true);
         panelHost.SetActive(false);
-
-        StartCoroutine(InitServicesCR());
-    }
-
-    private IEnumerator InitServicesCR()
-    {
-        var initTask = UnityServices.InitializeAsync();
-        yield return new WaitUntil(() => initTask.IsCompleted);
-
-        if (initTask.Exception != null)
-        {
-            Debug.LogError("Unity Services error: " + initTask.Exception);
-            yield break;
-        }
-
-        if (!AuthenticationService.Instance.IsSignedIn)
-        {
-            // sign in anonimo
-            var authTask = AuthenticationService.Instance.SignInAnonymouslyAsync();
-            yield return new WaitUntil(() => authTask.IsCompleted);
-
-            if (authTask.Exception != null)
-            {
-                Debug.LogError("Auth error: " + authTask.Exception);
-                yield break;
-            }
-        }
-
-        Debug.Log("Unity Services. Player ID: " + AuthenticationService.Instance.PlayerId);
     }
 
     // host panel
