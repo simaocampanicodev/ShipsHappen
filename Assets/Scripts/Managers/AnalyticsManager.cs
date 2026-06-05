@@ -29,7 +29,7 @@ public class AnalyticsManager : MonoBehaviour
 
     private IEnumerator AddWinCR()
     {
-        // busca o score atual do jogador
+        // busca o score atual
         var getTask = LeaderboardsService.Instance.GetPlayerScoreAsync(LEADERBOARD_ID);
         yield return new WaitUntil(() => getTask.IsCompleted);
 
@@ -37,18 +37,15 @@ public class AnalyticsManager : MonoBehaviour
         if (getTask.Exception == null && getTask.Result != null)
             currentScore = getTask.Result.Score;
 
-        // incrementa +1 vitoria
-        var addTask = LeaderboardsService.Instance.AddPlayerScoreAsync(
-            LEADERBOARD_ID, currentScore + 1
-        );
-        yield return new WaitUntil(() => addTask.IsCompleted);
+        // envia o score atual + 1
+        var task = LeaderboardsService.Instance.AddPlayerScoreAsync(LEADERBOARD_ID, currentScore + 1);
+        yield return new WaitUntil(() => task.IsCompleted);
 
-        if (addTask.Exception != null)
-            Debug.LogError("Leaderboard error: " + addTask.Exception);
+        if (task.Exception != null)
+            Debug.LogError("Leaderboard error: " + task.Exception);
         else
-            Debug.Log("Win registered. Total wins: " + (currentScore + 1));
+            Debug.Log("Win registered! Total: " + task.Result.Score);
     }
-
     public IEnumerator GetTopScoresCR(System.Action<string> callback)
     {
         var task = LeaderboardsService.Instance.GetScoresAsync(LEADERBOARD_ID);

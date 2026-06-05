@@ -25,6 +25,11 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
+        if (NetworkManager.Singleton != null && !NetworkManager.Singleton.IsServer && !NetworkManager.Singleton.IsClient)
+        {
+            Destroy(NetworkManager.Singleton.gameObject);
+        }
+
         panelMain.SetActive(true);
         panelHost.SetActive(false);
 
@@ -143,6 +148,16 @@ public class LobbyManager : MonoBehaviour
         }
 
         StartCoroutine(JoinGameCR(code));
+    }
+
+    public void OnClickBack()
+    {
+        if (NetworkManager.Singleton.IsHost)
+            NetworkManager.Singleton.Shutdown();
+
+        panelHost.SetActive(false);
+        panelMain.SetActive(true);
+        logo.SetActive(true);
     }
 
     // join game
