@@ -200,4 +200,19 @@ public class GameManager : NetworkBehaviour
             gridAttack.GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
     }
+
+    public void OnClickSurrender()
+    {
+        // envia surrender para o servidor
+        SurrenderServerRpc(myPlayerIndex);
+    }
+
+    [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
+    private void SurrenderServerRpc(int surrenderIndex)
+    {
+        // inimigo ganha
+        int winnerIndex = surrenderIndex == 0 ? 1 : 0;
+        gameOver.Value = true;
+        DeclareResultClientRpc(winnerIndex);
+    }
 }

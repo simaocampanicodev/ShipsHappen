@@ -6,7 +6,6 @@ public class LogoAnimation : MonoBehaviour
     [SerializeField] private float moveFrequency = 1f;
 
     [SerializeField] private float scaleAmplitude = 0.05f;
-    [SerializeField] private float scaleFrequency = 1f;
 
     [SerializeField] private float rotationAmount = 5f;
     [SerializeField] private float rotationSpeed = 0.8f;
