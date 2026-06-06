@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +24,9 @@ public class ResultSceneController : MonoBehaviour
 
     public void OnClickMenu()
     {
+        if (NetworkManager.Singleton != null)
+            Destroy(NetworkManager.Singleton.gameObject);
+
         SceneManager.LoadScene("MainMenu");
     }
 }

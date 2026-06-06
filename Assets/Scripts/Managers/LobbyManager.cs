@@ -21,11 +21,16 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] private TMP_InputField inputJoinCode;
 
     [SerializeField] private UnityTransport transport;
+    [SerializeField] private GameObject networkManagerPrefab;
 
     private bool isCancelled = false;
 
     void Start()
     {
+        // cria um novo NetworkManager se nao existir
+        if (NetworkManager.Singleton == null)
+            Instantiate(networkManagerPrefab);
+
         panelMain.SetActive(true);
         panelHost.SetActive(false);
     }
@@ -74,6 +79,7 @@ public class LobbyManager : MonoBehaviour
         string joinCode = joinCodeTask.Result;
 
         // transport com o relay host
+        transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         foreach (var endpoint in allocation.ServerEndpoints)
         {
             transport.SetRelayServerData(
@@ -151,6 +157,7 @@ public class LobbyManager : MonoBehaviour
         JoinAllocation allocation = joinTask.Result;
 
         // transport com o relay client
+        transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
         foreach (var endpoint in allocation.ServerEndpoints)
         {
             transport.SetRelayServerData(

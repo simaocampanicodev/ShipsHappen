@@ -50,6 +50,8 @@ public class GameManager : NetworkBehaviour
         myShips = GameData.Instance.MyShips;
         // mostra os barcos na grid de defesa
         DefenseGridManager.Instance.ShowShips(myShips);
+        // regista as posicoes individuais dos barcos no painel de status
+        ShipStatusPanel.Instance.RegisterShipsExact(GameData.Instance.MyShipCellGroups);
 
         gridAttack.SetActive(false);
         gridDefense.SetActive(false);

@@ -7,6 +7,7 @@ public class GameData : MonoBehaviour
 
     private Dictionary<ulong, bool[,]> playerShips = new Dictionary<ulong, bool[,]>();
     public bool[,] MyShips = new bool[10, 10];
+    public List<List<Vector2Int>> MyShipCellGroups = new List<List<Vector2Int>>();
 
     void Awake()
     {

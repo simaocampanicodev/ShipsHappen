@@ -88,8 +88,6 @@ public class PlacementManager : NetworkBehaviour
             FindObjectsByType<ShipDragger>()
         );
 
-        // passa para o ShipStatusPanel as posicoes individuais
-        // (apenas o jogador local tem o painel)
         List<List<Vector2Int>> shipCellGroups = new List<List<Vector2Int>>();
         foreach (var ship in allShips)
         {
@@ -98,7 +96,8 @@ public class PlacementManager : NetworkBehaviour
                 shipCellGroups.Add(cells);
         }
 
-        ShipStatusPanel.Instance.RegisterShipsExact(shipCellGroups);
+        // guarda no GameData para usar na GameScene
+        GameData.Instance.MyShipCellGroups = shipCellGroups;
 
         // converte o array 2D para flat para enviar pela rede
         bool[] shipsFlat = new bool[100];
