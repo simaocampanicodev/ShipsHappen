@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.13725491, g: 0.38431376, b: 0.47450984, a: 1}
+  m_EffectColor: {r: 0.15593147, g: 0.15263441, b: 0.6603774, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 0
 --- !u!1 &234846126
@@ -768,7 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.13725491, g: 0.38431376, b: 0.47450984, a: 1}
+  m_EffectColor: {r: 0.15593147, g: 0.15263441, b: 0.6603774, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 0
 --- !u!1 &451593187
@@ -1054,7 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.13725491, g: 0.38431376, b: 0.47450984, a: 1}
+  m_EffectColor: {r: 0.15593147, g: 0.15263441, b: 0.6603774, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 0
 --- !u!1 &477590888
@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.13725491, g: 0.38431376, b: 0.47450984, a: 1}
+  m_EffectColor: {r: 0.15593147, g: 0.15263441, b: 0.6603774, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 0
 --- !u!1 &534142451
@@ -2092,6 +2092,7 @@ GameObject:
   - component: {fileID: 864113936}
   - component: {fileID: 864113938}
   - component: {fileID: 864113937}
+  - component: {fileID: 864113939}
   m_Layer: 5
   m_Name: Logo
   m_TagString: Untagged
@@ -2156,6 +2157,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864113935}
   m_CullTransparentMesh: 1
+--- !u!114 &864113939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864113935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ce1b5d809eb3d48ad94ba1bad66bbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LogoAnimation
+  moveAmplitude: 0.5
+  moveFrequency: 1.12
+  scaleAmplitude: 0.15
+  scaleFrequency: 0.11
+  rotationAmount: 3
+  rotationSpeed: 0.5
 --- !u!1 &886499645
 GameObject:
   m_ObjectHideFlags: 0
@@ -2649,7 +2668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.13725491, g: 0.38431376, b: 0.47450984, a: 1}
+  m_EffectColor: {r: 0.15593147, g: 0.15263441, b: 0.6603774, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 0
 --- !u!1 &1258475395
@@ -3009,7 +3028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.13725491, g: 0.38431376, b: 0.47450984, a: 1}
+  m_EffectColor: {r: 0.15593147, g: 0.15263441, b: 0.6603774, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 0
 --- !u!1 &1458256995
@@ -3859,7 +3878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.13725491, g: 0.38431376, b: 0.47450984, a: 1}
+  m_EffectColor: {r: 0.15593147, g: 0.15263441, b: 0.6603774, a: 1}
   m_EffectDistance: {x: 10, y: 10}
   m_UseGraphicAlpha: 0
 --- !u!1 &1979021195
