@@ -32,3 +32,18 @@ Jogo de batalha naval online. Dois jogadores conectam-se através de um código 
 ### 18/05/2026
 
 A procurar uma ideia para o jogo, joguei um jogo chamado BattleTabs (https://discord.com/application-directory/battletabs), um jogo de batalha naval que está disponível no Discord. Gostei do conceito e comecei a fazer a pesquisa, onde procurei logo por uma imagem de referência para o layout da grelha, até porque eu não sabia sequer o tamanho da mesma, até encontrar a imagem que me ajudou (https://www.digitall.vodafone.pt/wp-content/uploads/2021/07/DA024L1.1-1024x576.jpg). Após isso, comecei por usar o Unity Netcode (https://youtu.be/3yuBOB3VrCk?si=NB_LHXBzdzy4IMHV) e o Unity Relay (https://youtu.be/msPNJ2cxWfw?si=fpNF54Y6aT4eOamT), e ao mesmo tempo que procurava pelos dois encontrei um vídeo que juntava os dois, tanto a programação de um jogo de batalha naval 2D como a parte de fazer um jogo Online no Unity. Tutorial parte 1 (https://www.youtube.com/watch?v=s3ZrQbI5o_k) e parte 2 (https://youtu.be/3Fw-NiZ3HGg?si=J4osvecTw9GkBtOQ). O link do github da minha inspiração para a client side do jogo (https://github.com/mobyjames/naval-battle-client).
+
+### 28/05/2026
+
+Criação do projeto Unity com `.gitignore` e `README.md` e conectando o projeto ao GitHub.
+
+### 31/05/2026
+
+Instalação dos packages necessários:
+
+Netcode for GameObjects
+Unity Transport
+Multiplayer Services
+Authentication
+
+Criação do `LobbyManager.cs` com base no `NetworkSetup.cs` do projeto do professor. Implementação dos botões Host e Join com comunicação usando o Unity Relay (ativado no https://cloud.unity.com/). Testes ao MainMenu para, quando houver 2 pessoas na sala mudar para a GameScene.
