@@ -1099,7 +1099,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.7329566, g: 0.8349549, b: 0.8584906, a: 1}
+  m_Color: {r: 0, g: 0.84705883, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2214,7 +2214,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1055395264}
   - {fileID: 1692657199}
   - {fileID: 768265027}
   - {fileID: 1379651610}
@@ -2222,6 +2221,7 @@ RectTransform:
   - {fileID: 1555273509}
   - {fileID: 1290811574}
   - {fileID: 1144452282}
+  - {fileID: 1055395264}
   m_Father: {fileID: 59991222}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
