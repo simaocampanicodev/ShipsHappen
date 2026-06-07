@@ -46,4 +46,12 @@ Unity Transport
 Multiplayer Services
 Authentication
 
-Criação do `LobbyManager.cs` com base no `NetworkSetup.cs` do projeto do professor. Implementação dos botões Host e Join com comunicação usando o Unity Relay (ativado no https://cloud.unity.com/). Testes ao MainMenu para, quando houver 2 pessoas na sala mudar para a GameScene.
+Criação do `LobbyManager.cs` com base no `NetworkSetup.cs` do projeto do professor. Implementação dos botões Host e Join com comunicação usando o Unity Relay (ativado no https://cloud.unity.com/). Testes ao MainMenu para, quando houver 2 pessoas na sala mudar para a `GameScene`.
+
+### 01/06/2026
+
+Adicionei o package ParrelSync para poder testar a parte multiplayer localmente (faz clone do projeto instantâneamnete e dá para testar com os dois editores ao mesmo tempo). Primeiro teste a funcionar onde: O Host cria sala, o Client entra com código, ambos são enviados para a `PlacementScene`. Resolvi um problema de merge conflicts no ficheiro `PlacementScene.unity` que aconteceram porque eu fiz alterações no portátil e esqueci-me de dar pull quando fui para o PC, fazendo com que fosse necessários editar o ficheiro manualmente para conseguir dar merge.
+
+### 02/06/2026
+
+Início da `PlacementScene`, que foi feito a grelha 10x10 usando um `GridLayoutGroup` conectado ao script `GridManager.cs`, um script `ShipDragger.cs` que implementa `IBeginDragHandler`, `IDragHandler` e `IEndDragHandler` para arrastar os barcos para a grid, a rotação dos barcos mudando o `sizeDelta` deles e a deteção das colisões entre os barcos usando um array para quando o local está ocupado. Tive alguns problemas inicialmente onde os barcos desapareciam quando eu arrastava, eu mudei e em vez de usar `transform.position = e.position` mudei para `RectTransformUtility`, problema na `Camera.main` que ficava null quando era Screen Space Overlay e criei um parent `ShipsOnGrid` com todos os barcos que estavam posicionados.
