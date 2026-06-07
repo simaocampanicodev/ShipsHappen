@@ -13,6 +13,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private GameObject gridAttack;
     [SerializeField] private GameObject gridDefense;
     [SerializeField] private GameObject shipsStatusPanel;
+    [SerializeField] private GameObject surrenderPanel;
 
     private NetworkVariable<int> currentTurn = new NetworkVariable<int>(0); // 0 = host, 1 = client
     private NetworkVariable<bool> gameOver = new NetworkVariable<bool>(false);
@@ -203,8 +204,21 @@ public class GameManager : NetworkBehaviour
 
     public void OnClickSurrender()
     {
-        // envia surrender para o servidor
+        // painel de confirm
+        surrenderPanel.SetActive(true);
+    }
+
+    public void OnClickConfirmSurrender()
+    {
+        // confirmar surrender
+        surrenderPanel.SetActive(false);
         SurrenderServerRpc(myPlayerIndex);
+    }
+
+    public void OnClickCancelSurrender()
+    {
+        // fechar painel
+        surrenderPanel.SetActive(false);
     }
 
     [Rpc(SendTo.Server, InvokePermission = RpcInvokePermission.Everyone)]
